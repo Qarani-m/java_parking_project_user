@@ -36,20 +36,21 @@ public class parkingController {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString("/parking-lots");
 int i=0;
         for (String[] street : streets) {
-            slots.add(new Slot(street[0], "Slots available: "+String.valueOf(42-globalValues.availableSlots()[i]), street[3]+" Street",  "url","position"));
-            System.out.println(globalValues.availableSlots()[i]);
+            String url = UriComponentsBuilder.fromUriString("/reserve").queryParam("id", street[2]).queryParam("lot-name", street[0]).toUriString();
+            System.out.println(url);
+            slots.add(new Slot(street[0], "Slots available: "+String.valueOf(42-globalValues.availableSlots()[i]), street[3]+" Street",  url,"position"));
+            System.out.println(street[2]);
             i+=1;
-
         }
-
         model.addAttribute("slots",slots);
         return mav;
     }
 
-    @GetMapping("/parking-lots")
-    public ModelAndView Details(@RequestParam("id") String id){
-        ModelAndView mav = new ModelAndView("Details");
-        System.out.println(id);
+    @GetMapping("/reserve")
+    public ModelAndView Details(@RequestParam("id") String id,@RequestParam("lot-name") String name,Model model){
+        ModelAndView mav = new ModelAndView("reserve");
+        model.addAttribute("name",name);
+        String url = UriComponentsBuilder.fromUriString("/reserve-processing").queryParam("id", id).toUriString();
        return mav;
     }
 }

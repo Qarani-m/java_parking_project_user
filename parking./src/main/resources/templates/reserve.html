@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reservation Form</title>
+    <link rel="stylesheet" href="reserve.css">
+</head>
+<body>
+<form>
+    <h1>Reservation Form</h1>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div class="form-group">
+        <label for="license-plate">License Plate:</label>
+        <input type="text" id="license-plate" name="license-plate" required>
+    </div>
+    <div class="form-group">
+        <label for="vehicle-type">Vehicle Type:</label>
+        <select id="vehicle-type" name="vehicle-type" required>
+            <option value="">-- Select vehicle type --</option>
+            <option value="car">Car</option>
+            <option value="truck">Truck</option>
+            <option value="motorcycle">Motorcycle</option>
+            <option value="other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="parking-duration">Parking Duration:</label>
+        <input type="number" name="parking-duration" id="parking-duration" required placeholder="hours">
+    </div>
+    <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" id="terms-and-conditions" name="terms-and-conditions" required>
+        <label for="terms-and-conditions">I agree to the Terms and Conditions.</label>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
