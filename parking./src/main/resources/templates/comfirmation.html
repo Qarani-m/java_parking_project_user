@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Reservation Form</title>
-     <link rel="stylesheet" href="reserve.css">
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+        <html xmlns:th="http://www.thymeleaf.org">
+
+        <head>
+        <meta charset="utf-8">
+        <title>Reservation Form</title>
+    <link rel="stylesheet" href="reserve.css">
     <link rel="stylesheet" href="../static/reserve.css">
 </head>
 <body id="body">
@@ -45,21 +49,21 @@
 </style>
 
 
-<!--    <div class='bigdiv'>-->
-<!--        <div class='smalldiv'>-->
-<!--            <p id="message">-->
-<!--                Dear client, please pay your parking reservation fee to Till Number: 959595 <br>Thank you for choosing our parking lot -->
-<!--            </p>-->
-<!--            &lt;!&ndash; <a href="/"><button>Back</button></a> &ndash;&gt;-->
-<!--            <a href="index.html"><button>Back</button></a>-->
-<!--            -->
-<!--        </div>-->
-<!--    </div>-->
+<div class='bigdiv'>
+    <div class='smalldiv'>
+        <p id="message">
+            Dear client, please pay your parking reservation fee to Till Number: 959595 <br>Thank you for choosing our parking lot
+        </p>
+        <!-- <a href="/"><button>Back</button></a> -->
+        <a href="/"><button>Back</button></a>
+
+    </div>
+</div>
 
 
 <form th:action="${url}" method="get" >
 
-    
+
     <input type="text" id="id" name="id" required hidden="hidden" th:value="${id}">
     <h1>Reservation Form</h1>
     <div class="form-group">
@@ -109,5 +113,11 @@
     <!-- <script src="index.js"></script> -->
     <script src="../static/index.js"></script>
 </form>
+</body>
+</html>
+</title>
+</head>
+<body>
+
 </body>
 </html>

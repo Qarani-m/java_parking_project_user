@@ -151,7 +151,6 @@ body{
 .maps{
     width: 47.2vw;
     height: 97vh;
-   background-color: red;
    position: fixed;
    margin-left: 30vw;
    margin-top: -3vh;

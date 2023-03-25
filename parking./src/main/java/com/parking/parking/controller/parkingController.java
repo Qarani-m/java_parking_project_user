@@ -5,6 +5,7 @@ import com.parking.parking.controller.utils.Slot;
 import com.parking.parking.models.DbConfig;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
+import org.python.util.PythonInterpreter;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,9 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Float.parseFloat;
+
+
+
 
 @RestController
 public class parkingController {
@@ -60,6 +64,18 @@ public class parkingController {
         model.addAttribute("url",url   );
         return mav;
     }
+    @GetMapping("/test")
+    public ModelAndView test(@RequestParam("id") String id,@RequestParam("lot-name") String name,Model model){
+        ModelAndView mav = new ModelAndView("reserve");
+        System.out.println("kjhgfdsdfghjk");
+        return mav;
+    }
+    @GetMapping("/test2")
+    public ModelAndView tes2(@RequestParam("id") String id,@RequestParam("lot-name") String name,Model model){
+        ModelAndView mav = new ModelAndView("reserve");
+        System.out.println("kjhgfdsdfghjk--------------------");
+        return mav;
+    }
     @GetMapping("/reserve-processing")
     public ModelAndView reserve_processing(
             @RequestParam("id") String id,
@@ -75,7 +91,7 @@ public class parkingController {
             Model model) throws SQLException {
         ModelAndView mav = null;
         try {
-            mav = new ModelAndView("checkout");
+            mav = new ModelAndView("comfirmation");
             String auth = authToken();
             String slot = "C1R2S06";
             String departure = calculateDeparture(timeEntry, parking_duration);
@@ -84,7 +100,9 @@ public class parkingController {
             String query2 = "insert into slots(slot_id,occupied, reserved)values('" + "C1R2S06" + "', false, true) ;";
             dbConfig.executeQuery(query1);
             dbConfig.executeQuery(query2);
-            sendSms(phone,auth,slot);
+
+
+//            sendSms(phone,auth,slot);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -109,16 +127,17 @@ public class parkingController {
         System.out.println(sb.toString());
         return sb.toString();
     }
-    public void  sendSms(String to,String token, String slot){
-        try{
-            String ACCOUNT_SID = "AC4efb2e23073266a54d9ca094e8add3fb";
-            String AUTH_TOKEN = "35d14a7760aab254070beac21c46344b";
-            Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-//            Message message = Message.creator(new com.twilio.type.PhoneNumber("+254704847676"), new com.twilio.type.PhoneNumber(to),"Your gatepass Token is "+ token).create();
-            Message message = Message.creator(new com.twilio.type.PhoneNumber(to), new com.twilio.type.PhoneNumber("+14754451705"),"Your Gatepass Token is: "+token+"\n Parking slot allocated"+slot).create();
-        }catch(Exception e){
-            System.out.println(e);
-        }
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
