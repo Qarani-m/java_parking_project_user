@@ -17,7 +17,7 @@ class SMS:
         self.sms = africastalking.SMS
 
     def send(self):
-            recipients = ["+254798576482","+254745279180" , "+254704847676","+254793865366","+254768315754"]
+            recipients = ["+254718679186","+254704847676"]
             auth_code = ''
             time =" time+30"
             parking_slot="name"
@@ -25,7 +25,7 @@ class SMS:
             sender = "smatr parking thing"
             try:
                 response = self.sms.send(message, recipients)
-                print (response)
+                print(response)
             except Exception as e:
                 print ('Encountered an error while sending: %s' % str(e))
 

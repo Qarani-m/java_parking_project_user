@@ -1,0 +1,15 @@
+<div>
+  <button class="btn">one</button>
+  <button class="btn">two</button>
+  <button class="btn">three</button>
+  <button class="btn">four</button>
+</div>
+
+<script>
+  const btns  = document.getElementsByClassName("btn");
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", () => {
+      console.log(i + 1);
+    });
+  }
+</script>

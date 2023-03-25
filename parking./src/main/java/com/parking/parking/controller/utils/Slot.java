@@ -13,4 +13,5 @@ public class Slot {
     private String streetName;
     private String url;
     private String position;
+    private String src;
 }

@@ -62,7 +62,10 @@ body{
     font-weight: 600;
 }
 
-
+#reserve_btn{
+    line-height: 4vh;
+    color: red;
+}
 
 
 

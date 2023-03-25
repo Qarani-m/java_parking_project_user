@@ -34,12 +34,13 @@ public class parkingController {
     public ModelAndView hello(Model model){
         ModelAndView mav = new ModelAndView("index");
         List<Slot> slots = new ArrayList<>();
-        slots.add(new Slot("Street C", "true", "22","url__3","position"));
+        slots.add(new Slot("Street C", "true", "22","url__3","position","k"));
         mav.addObject("slots", slots);
         return mav;
     }
     @GetMapping("/")
     public ModelAndView Search(Model model) throws SQLException {
+        ArrayList iframe = new ArrayList();
         ModelAndView mav = new ModelAndView("index");
         List<Slot> slots = new ArrayList<>();
         String query = "select * from places;";
@@ -48,10 +49,14 @@ public class parkingController {
         int i=0;
         for (String[] street : streets) {
             String url = UriComponentsBuilder.fromUriString("/reserve").queryParam("id", street[2]).queryParam("lot-name", street[0]).toUriString();
-            slots.add(new Slot(street[0], "Slots available: "+String.valueOf(42-globalValues.availableSlots()[i]), street[3]+" Street",  url,"position"));
+            slots.add(new Slot(street[0], "Slots available: "+String.valueOf(42-globalValues.availableSlots()[i]), street[3]+" Street",  url,""+street[4],street[5]));
+            iframe.add(street[5]);
+            System.out.println(street[4]);
+
             i+=1;
         }
         model.addAttribute("slots",slots);
+        model.addAttribute( "maps",iframe);
         return mav;
     }
 

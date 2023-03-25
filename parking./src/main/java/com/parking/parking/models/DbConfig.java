@@ -19,7 +19,6 @@ public class DbConfig {
             statement = connection.createStatement();
             if (query.toLowerCase().startsWith("select")) {
                 resultSet = statement.executeQuery(query);
-
                 if(query.contains("select * from places")){
                     return selectStreets(resultSet);
                 } else if (query.contains("SELECT JSON_ARRAY((SELECT COUNT(*) FROM lot WHERE slot_number LIKE")) {
@@ -45,7 +44,6 @@ return null;
     }
 
     private List selectStreets(ResultSet resultSet) throws SQLException {
-        System.out.println("----------------------------------------------------------____");
         List<String[]> streets = new ArrayList<>();
         while(resultSet.next()){
             String lotName =resultSet.getString("lotName");
@@ -53,7 +51,8 @@ return null;
             String position =resultSet.getString("position");
             String lotId =resultSet.getString("lotId");
             String streetName =resultSet.getString("street");
-            streets.add(new String[]{lotName,city,lotId,streetName,position});
+            String src= resultSet.getString("src");
+            streets.add(new String[]{lotName,city,lotId,streetName,position,src});
         }
         System.out.println(streets.get(0)[0]);
 
