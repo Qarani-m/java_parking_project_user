@@ -17,14 +17,18 @@ public class DbConfig {
         try {
             connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
             statement = connection.createStatement();
-            resultSet = statement.executeQuery(query);
-            if(query.contains("select * from places")){
-                return selectStreets(resultSet);
-            } else if (query.contains("SELECT JSON_ARRAY((SELECT COUNT(*) FROM lot WHERE slot_number LIKE")) {
-                return globalCount(resultSet);
+            if (query.toLowerCase().startsWith("select")) {
+                resultSet = statement.executeQuery(query);
 
+                if(query.contains("select * from places")){
+                    return selectStreets(resultSet);
+                } else if (query.contains("SELECT JSON_ARRAY((SELECT COUNT(*) FROM lot WHERE slot_number LIKE")) {
+                    return globalCount(resultSet);
+                }
+            }else{
+                int rowsAffected = statement.executeUpdate(query);
+                System.out.println(rowsAffected + " rows affected.");
             }
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
