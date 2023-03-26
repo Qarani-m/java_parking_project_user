@@ -9,14 +9,14 @@
   navigate_button[i].addEventListener("click", () => {
  
       var url = navigate_link[i].getAttribute('href')
-      const parts = url.split("dir//");
+      const parts = url.split("dir/");
       const firstPart = parts[0] + "dir/";
       part1=firstPart
       part2=parts[1]
 
-    console.log(i + 1);
-    console.log(part1);
-    console.log(part2);
+    // console.log(i + 1);
+    // console.log(part1);
+    // console.log(part2);
     getLocation()
   });
 }
@@ -30,6 +30,7 @@ function getLocation() {
 
 function showPosition(position) {
   var fulCords = `${part1}${position.coords.latitude},${position.coords.longitude}/${part2}`
+  console.log(fulCords);
   window.open(fulCords, '_blank');
 }
 

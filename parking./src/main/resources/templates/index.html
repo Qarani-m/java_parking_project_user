@@ -10,12 +10,21 @@
 			<p>Smatr Parking</p>
 		</div>
 		<div class="links">
-				<a href=""><li><img src="images/house.svg" alt="">Home</li></a>
-				<a href=""><li><img src="images/house.svg" alt="">Creators</li></a>
-				<a href=""><li><img src="images/house.svg" alt="">About</li></a>
-				<a href=""><li><img src="/images/house.svg" alt="">Contacts</li></a>
+				<a href=""><li>Home</li></a>
+				<a href=""><li>Creators</li></a>
+				<a href=""><li>About</li></a>
+				<a href=""><li>Contacts</li></a>
 		</div>
-		
+		<style>
+			#serach{
+				height:4vh;
+				width:7vw;
+				border-radius:2vh;
+				background-color:#dc143c;
+				color:white;
+				border:none
+			}
+		</style>
 
 	</div>
 	<div class="right">
@@ -23,13 +32,14 @@
 			<div class="form">
 				<form action="">
 					<input type="text" placeholder="Search....">
+					<button class="navigate_button" id="serach">Search</button>
 				</form>
 			</div>
 
 			<div th:each="slot : ${slots}" class="slot-card">
 			<a href="">
 					<div class="lot-image">
-					<img src="images/ot1.jpg" alt="">
+					<img th:src="${slot.image}" alt="">
 				</div>
 			</a>
 				<div class="lot-text">
@@ -55,6 +65,7 @@
 					</div>
 				</div>
 				<div class="lot-buttons">
+
 
 					<a th:href="${slot.url}" id="reserve_btn"><button>Reserve</button></a>
 					<button>Review</button>

@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Slot {
     private String lotName;
+    private String image;
     private String city;
     private String streetName;
     private String url;
     private String position;
     private String src;
+
 }

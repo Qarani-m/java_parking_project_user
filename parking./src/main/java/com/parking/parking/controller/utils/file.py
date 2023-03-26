@@ -17,10 +17,11 @@ class SMS:
         self.sms = africastalking.SMS
 
     def send(self):
-            recipients = ["+254718679186","+254704847676"]
+            recipients = ["+254704847676"]
             auth_code = ''
             time =" time+30"
             parking_slot="name"
+
             message = f"Dear Customer your have successfully reserved a parking slot at {parking_slot}, \n Provide this auth code {auth_code} on your arrival, Your slot will be de-allocated  at {time}"
             sender = "smatr parking thing"
             try:
