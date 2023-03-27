@@ -35,7 +35,6 @@
 					<button class="navigate_button" id="serach">Search</button>
 				</form>
 			</div>
-
 			<div th:each="slot : ${slots}" class="slot-card">
 			<a href="">
 					<div class="lot-image">
@@ -65,9 +64,14 @@
 					</div>
 				</div>
 				<div class="lot-buttons">
+					<style>
+						#reserve_btn{
+						color:white,
+						text-decoration:none;
+						}
+					</style>
 
-
-					<a th:href="${slot.url}" id="reserve_btn"><button>Reserve</button></a>
+					<button><a th:href="${slot.url}" id="reserve_btn" th:text="Reserve" style="color:white;">Reserve</a></button>
 					<button>Review</button>
 					<a th:href="${slot.position}" class="navigate_link"></a>
 					<button class="navigate_button">Navigate</button>
@@ -91,7 +95,7 @@
 
 
 
-
+</div>
 </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
      <script src="index.js" defer></script>

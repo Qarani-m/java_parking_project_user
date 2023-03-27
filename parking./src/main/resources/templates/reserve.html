@@ -9,46 +9,8 @@
 </head>
 <body id="body">
 
-<style>
-    .bigdiv{
-
-        height: 100vh;
-        width: 100vw;
-        background-color: rgba(231, 224, 224, 0.902);
-        position: fixed;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .smalldiv{
-            height: 20vh;
-            width: 20vw;
-            outline:1px solid #2d2d2d2d ;
-            border-radius: 3vh;
-            background-color: rgba(231, 224, 224, 1);
-            display: flex;
-        justify-content: center;
-        align-items: center;
-        padding-left: 3vh;
-        flex-direction: column;
-    }
-    .smalldiv button{
-        height: 4vh;
-        width: 10vw;
-        border: none;
-        background-color: #dc143c;
-        border-radius: 2vh;
-        margin-top: 3vh;
-        color: #fff;
-    }
-</style>
-
-
 
 <form th:action="${url}" method="get" >
-
-    
     <input type="text" id="id" name="id" required hidden="hidden" th:value="${id}">
     <h1>Reservation Form</h1>
     <div class="form-group">
