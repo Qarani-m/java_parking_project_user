@@ -65,11 +65,11 @@ public class parkingController {
     public ModelAndView Details(@RequestParam("id") String id,Model model){
         ModelAndView mav = new ModelAndView("reserve");
         String url = UriComponentsBuilder.fromUriString("/reserve-processing").toUriString();
-
         model.addAttribute("id",id);
         model.addAttribute("url",url   );
         return mav;
     }
+    ArrayList<String> details= new ArrayList<>();
     @GetMapping("/reserve-processing")
     public ModelAndView reserve_processing(
             @RequestParam("id") String id,
@@ -82,48 +82,32 @@ public class parkingController {
             @RequestParam("date") String date,
             @RequestParam("time") String timeEntry,
             @RequestParam("terms_and_conditions") String terms_and_conditions,
-            Model model) throws SQLException {
+            Model model) throws SQLException{
         ModelAndView mav = null;
         try {
-            selectSlot(id);
             mav = new ModelAndView("comfirmation");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             String auth = authToken();
             String slot = "C1R2S06";
             String departure = calculateDeparture(timeEntry, parking_duration);
             String charge = String.valueOf(50 * parseFloat(parking_duration));
-//            String query1 = "INSERT INTO reservations(date_, lotId,plate_number, size_, slot_number, entry_time, departure_time, charge, payment_id, auth) VALUES ('" + date + "' ,'"+id+"' '" + license_plate + "', '" + vehicle_type + "', '" + slot + "', '" + timeEntry + "', '" + departure + "', " + charge + ", '101', '" + auth + "');";
-//            String query2 = "insert into slots(slot_id,occupied, reserved)values('" + "C1R2S06" + "', false, true) ;";
-//            dbConfig.executeQuery(query1);
-//            dbConfig.executeQuery(query2);
+            model.addAttribute("tel",phone);
         } catch (Exception e) {
             System.out.println(e);
         }
         return mav;
     }
-
-    private void selectSlot(String id) {
-        if(id.toLowerCase().startsWith("f3")){
-        }
+    @GetMapping("/sendpayment")
+    public String tt(@RequestParam("phone") String phone){
+        RedirectView redirectView = new RedirectView();
+        String url = "http://localhost:6067/stkpush?phone="+phone;
+        System.out.println(url);
+        NodeApiEndpoint nodeApiEndpoint = new NodeApiEndpoint(url);
+//        NodeApiEndpoint djangoApiEndpoint = new NodeApiEndpoint("http://localhost:7989/sendSms/");
+        String data = nodeApiEndpoint.getData();
+        System.out.println("----THis is phone: " +phone);
+        return "phone";
     }
 
-    public static void main(String[] args) {
-        generateSequence();
-
-    }
     public static String[] generateSequence() {
         boolean found = false;
         String[] seq ={"C1R2S04","C2R1S02"};
@@ -133,55 +117,18 @@ public class parkingController {
             for (int j = 1; j <= 4; j++) {
                 for (int k = 1; k <= 12; k++) {
                     sequence[index] = "C" + i + "R" + j + "S" + String.format("%02d", k);
-
-
-
-
-
-
-
-
-
-
-
-
-
                     index++;
                 }
             }
         }
-        for (String element : sequence) {
-            if (element.equals("C1R2S03")) {
-                found = true;
-                break;
-            }
-        }
-
-        if (found) {
-            System.out.println( " exists in the array.");
-        } else {
-            System.out.println( " does not exist in the array.");
-        }
-
         return sequence;
     }
 
-    @GetMapping("/ttt")
-    public RedirectView tt(){
-        RedirectView redirectView = new RedirectView();
-        NodeApiEndpoint nodeApiEndpoint = new NodeApiEndpoint("http://localhost:6065/stkpush");
-        NodeApiEndpoint djangoApiEndpoint = new NodeApiEndpoint("http://localhost:7989/sendSms/");
-
-
-        String data = nodeApiEndpoint.getData();
-        return redirectView;
-    }
     public String calculateDeparture(String entry, String time_){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         LocalTime entryTime = LocalTime.parse(entry, formatter);
         LocalTime departureTime = entryTime.plusHours(Long.parseLong(time_));
         String departure = departureTime.format(formatter);
-        System.out.println(departure.getClass());
         return  departure;
     }
     public String authToken(){
@@ -192,7 +139,10 @@ public class parkingController {
         for (int i = 0; i < LENGTH; i++) {
             sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
         }
-        System.out.println(sb.toString());
         return sb.toString();
     }
 }
+//            String query1 = "INSERT INTO reservations(date_, lotId,plate_number, size_, slot_number, entry_time, departure_time, charge, payment_id, auth) VALUES ('" + date + "' ,'"+id+"' '" + license_plate + "', '" + vehicle_type + "', '" + slot + "', '" + timeEntry + "', '" + departure + "', " + charge + ", '101', '" + auth + "');";
+//            String query2 = "insert into slots(slot_id,occupied, reserved)values('" + "C1R2S06" + "', false, true) ;";
+//            dbConfig.executeQuery(query1);
+//            dbConfig.executeQuery(query2);

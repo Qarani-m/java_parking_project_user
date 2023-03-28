@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -210,23 +210,27 @@ tfoot {
         <h1>Checkout</h1>
     </header>
 
-    <form action="http://localhost:6065/stkpush" class="form" method="GET">
+    <form id="payForm" action="" class="form" method="GET" onsubmit="setAction(event)">
         <fieldset>
             <legend>Payment Method</legend>
-
             <div class="form__radios">
+
+                <div class="form__radio">
+                    <label for="mastercard"><svg class="icon">
+                        <use xlink:href="#icon-mastercard" />
+                    </svg>Cash</label>
+                    <input id="mastercard" name="payment-method2" type="radio" />
+                </div>
                 <div class="form__radio">
                     <label for="mastercard"><svg class="icon">
                         <use xlink:href="#icon-mastercard" />
                     </svg>M-Pesa</label>
-                    <input id="mastercard" name="payment-method" type="radio" />
+                    <input id="mastercard1" name="payment-method2" type="radio" />
                 </div>
-
-
                 <div class="form__radio">
-                    <label for="mastercard"><svg class="icon">
-
-                    </svg>254704847676</label>
+                    <label for="mastercard"><p class="icon">
+                        <p id="number" th:text="${tel}" class="sub"></p>
+                    </label>
                 </div>
             </div>
         </fieldset>
@@ -246,12 +250,27 @@ tfoot {
         </div>
 
         <div>
-            <button class="button button--full" type="submit"><svg class="icon">
+            <button class="button button--full" type="submit" ><svg class="icon">
                 <use xlink:href="#icon-shopping-bag" />
             </svg>Comfirm Payment</button>
         </div>
     </form>
 </div>
+<script defer>
+  function setAction(event) {
+  event.preventDefault()
+  alert("iiii")
+    var form = document.getElementById("payForm");
+    var payInput = document.getElementById("number");
+    var payValue = payInput.value;
+
+
+    var actionUrl = "/sendpayment?phone=" + encodeURIComponent(payValue);;
+alert(actionUrl)
+
+    window.location= actionUrl;
+  }
+</script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
 
@@ -335,7 +354,6 @@ tfoot {
         </g>
     </symbol>
 </svg>
-
 
 
 </body>

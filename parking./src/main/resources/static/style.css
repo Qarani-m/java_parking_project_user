@@ -64,7 +64,6 @@ body{
 
 #reserve_btn{
     line-height: 4vh;
-    color: red;
 }
 
 
@@ -74,7 +73,6 @@ body{
 .right{
     width: 77.2vw;
     height: 97vh;
-    /* background-color:blue; */
     display: flex;
     flex-direction: row;
     padding-top: 3vh;
@@ -99,9 +97,9 @@ body{
     
 }
 .slot-card{
-    /* background-color: crimson; */
+    background-color: crimson;
     height: 33vh;
-    margin-top: 2vh;
+    margin-top: 4vh;
     border-radius: 3vh;
     background-color: #1e1e40;
     color: #ffff;

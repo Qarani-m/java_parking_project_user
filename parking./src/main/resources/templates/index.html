@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<link rel="stylesheet" href="style.css">
+	 <link rel="stylesheet" href="style.css">
 <!--	<link rel="stylesheet" href="../static/style.css">-->
 <body>
 
@@ -64,20 +64,13 @@
 					</div>
 				</div>
 				<div class="lot-buttons">
-					<style>
-						#reserve_btn{
-						color:white,
-						text-decoration:none;
-						}
-					</style>
-
 					<button><a th:href="${slot.url}" id="reserve_btn" th:text="Reserve" style="color:white;">Reserve</a></button>
 					<button>Review</button>
 					<a th:href="${slot.position}" class="navigate_link"></a>
 					<button class="navigate_button">Navigate</button>
 				</div>
-				
 			</div>
+			
 
 		</div>
 		<div class="maps" id="maps">
