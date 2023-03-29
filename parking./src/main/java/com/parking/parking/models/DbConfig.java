@@ -21,6 +21,8 @@ public class DbConfig {
                 resultSet = statement.executeQuery(query);
                 if(query.contains("select * from places")){
                     return selectStreets(resultSet);
+                } else if (query.contains("select * from places where lotName like'%\"+search+\"%' ")) {
+                    return searchQuery(resultSet);
                 } else if (query.contains("SELECT JSON_ARRAY((SELECT COUNT(*) FROM lot WHERE slot_number LIKE")) {
                     return globalCount(resultSet);
                 }
@@ -33,6 +35,7 @@ public class DbConfig {
         }
 return null;
     }
+
 
     private List globalCount(ResultSet resultSet) throws SQLException {
         String val = null;
@@ -56,6 +59,21 @@ return null;
         }
         System.out.println(streets.get(0)[0]);
 
+        return streets;
+    }
+    private List searchQuery(ResultSet resultSet) throws SQLException {
+        System.out.println("____________________________________________________________________________");
+        List<String[]> streets = new ArrayList<>();
+        while(resultSet.next()){
+            String lotName =resultSet.getString("lotName");
+            String city =resultSet.getString("city");
+            String position =resultSet.getString("position");
+            String lotId =resultSet.getString("lotId");
+            String streetName =resultSet.getString("street");
+            String src= resultSet.getString("src");
+            streets.add(new String[]{lotName,city,lotId,streetName,position,src});
+        }
+        System.out.println(streets.get(0)[0]);
         return streets;
     }
 }

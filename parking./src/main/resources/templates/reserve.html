@@ -2,63 +2,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <title>Reservation Form</title>
-     <link rel="stylesheet" href="reserve.css">
-    <link rel="stylesheet" href="../static/reserve.css">
+  <meta charset="utf-8">
+  <title>Reservation Form</title>
+  <link rel="stylesheet" href="reserve.css">
+  <link rel="stylesheet" href="../static/reserve.css">
 </head>
+
 <body id="body">
 
-
-<form th:action="${url}" method="get" >
-    <input type="text" id="id" name="id" required hidden="hidden" th:value="${id}">
+  <form action="reserve-processing" method="get">
+    <input type="text" id="id" name="id" th:value="${id}">
     <h1>Reservation Form</h1>
     <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required value="name">
     </div>
     <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required value="email@email">
     </div>
     <div class="form-group">
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required value="+254">
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required value="+254704847676">
     </div>
     <div class="form-group">
-        <label for="license-plate">License Plate:</label>
-        <input type="text" id="license-plate" name="license_plate" required>
+      <label for="license-plate">License Plate:</label>
+      <input type="text" id="license-plate" name="license_plate" required placeholder="ALL CAPS">
     </div>
     <div class="form-group">
-        <label for="vehicle-type">Vehicle Type:</label>
-        <select id="vehicle-type" name="vehicle_type" required>
-            <option value="">-- Select vehicle type --</option>
-            <option value="car">Car</option>
-            <option value="truck">Truck</option>
-            <option value="motorcycle">Motorcycle</option>
-            <option value="other">Other</option>
-        </select>
+      <label for="vehicle-type">Vehicle Type:</label>
+      <select id="vehicle-type" name="vehicle_type" required>
+        <option value="">-- Select vehicle type --</option>
+        <option value="car">Car</option>
+        <option value="truck">Truck</option>
+        <option value="motorcycle">Motorcycle</option>
+        <option value="other">Other</option>
+      </select>
     </div>
     <div class="form-group">
-        <label for="parking-duration">Parking Duration:</label>
-        <input type="number" name="parking_duration" id="parking-duration" required placeholder="hours">
+      <label for="parking-duration">Parking Duration:</label>
+      <input type="number" name="parking_duration" id="parking-duration" required placeholder="hours" value=9>
     </div>
     <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" min="2023-03-29" max="2044-05-20" required>
     </div>
     <div class="form-group">
-        <label for="time">Time:</label>
+      <label for="time">Time:</label>
 
-        <input type="time" id="time" name="time" min="00:00" max="23:59" step="3600" required>
+      <input type="time" id="time" name="time"  required>
     </div>
     <div class="form-group">
-        <input type="checkbox" id="terms-and-conditions" name="terms_and_conditions" required>
-        <label for="terms-and-conditions">I agree to the Terms and Conditions.</label>
+      <input type="checkbox" id="terms-and-conditions" name="terms_and_conditions" required>
+      <label for="terms-and-conditions">I agree to the Terms and Conditions.</label>
     </div>
-    <button id="formsubmit" type="submit">Submit</button>
+    <button id="formsubmit" type="submit" onclick="killcode(e)">Submit</button>
     <!-- <script src="index.js"></script> -->
     <script src="../static/index.js"></script>
-</form>
+    <script>
+      function killcode() {
+        alert("pppp")
+
+        e.preventDefault()
+        const plate = document.getElementById("license-plate").value
+        if (stplater.length >= 4 && stplate.charAt(0) === 'K' && !isNaN(parseInt(plate.charAt(3)))) {
+          return true;
+        } else {
+        alert("Invalid number plate")
+        window.location('/index')
+          return false;
+        }
+      }
+    </script>
+  </form>
 </body>
+
 </html>
