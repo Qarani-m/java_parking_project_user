@@ -1,12 +1,12 @@
 package com.parking.parking.controller;
 
-import com.parking.parking.controller.Sms.ApiClient;
-import com.parking.parking.controller.Sms.SmsResponse;
-import com.parking.parking.controller.utils.Global;
 import com.parking.parking.controller.Mpesa.NodeApiEndpoint;
+import com.parking.parking.controller.Sms.ApiClient;
+import com.parking.parking.controller.utils.Global;
 import com.parking.parking.controller.utils.Slot;
 import com.parking.parking.models.DbConfig;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,19 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.json.JSONObject;
+
 import java.sql.SQLException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Integer.parseInt;
 
 
 @RestController
-public class parkingController {
+public class parkingController extends Thread{
     Global globalValues = new Global();
     ApiClient apiClient = new ApiClient();
     DbConfig dbConfig = new DbConfig();
@@ -83,12 +84,14 @@ public class parkingController {
         return mav;
     }
     @GetMapping("/sendpayment")
-    public ModelAndView tt(@RequestParam("phone") String phone){
+    public ModelAndView tt(@RequestParam("phone") String phone) throws InterruptedException {
         RedirectView redirectView = new RedirectView();
         String url = "http://localhost:6067/stkpush?phone="+phone;
         System.out.println(url);
         NodeApiEndpoint nodeApiEndpoint = new NodeApiEndpoint(url);
         String data = nodeApiEndpoint.getData();
+        TimeUnit.SECONDS.sleep(10);
+
         try {
             JSONObject jsonObj = new JSONObject(data);
             String responseCode = jsonObj.getString("ResponseCode");
